@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($clientID) {
         // Client exists, redirect to sign in page
-        header('Location: signIn.html');
+        header('Location: redirectSignUp.html');
         exit();
     } else {
         // Client does not exist, continue with registration
