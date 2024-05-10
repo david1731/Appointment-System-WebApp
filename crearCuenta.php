@@ -19,7 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $existingClient = checkIfClientExists($conn, $email, $cellphone);
 
     if ($existingClient) {
-        header('Location: signIn.html'); // Redirect to sign-in page if client exists
+        echo '<html><head><meta http-equiv="refresh" content="5;url=signIn.html"></head>';
+        echo '<body><p>Account already exists. You will be redirected to the Sign In page in 5 seconds...</p></body></html>';
         exit;
     }
 
