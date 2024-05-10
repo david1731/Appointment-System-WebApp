@@ -41,7 +41,8 @@
                 le.level AS LevelName,
                 ts.startTime AS AppointmentStartTime,
                 ts.endTime AS AppointmentEndTime,
-                ap.appDate AS AppointmentDate
+                ap.appDate AS AppointmentDate,
+                ts.slotID As SlotID
                 FROM
                 appointmentSlots ap
                 JOIN clients cl ON ap.clientID = cl.clientID
@@ -82,6 +83,10 @@
                 ?>
             </tbody>
         </table>
+        <form action='cancelarCita.php' method='post'>
+            <input type='hidden' name='clientId' value="<?=$clientID;?>">
+            <button type='submit' class='btn btn-danger'>Cancelar Cita</button>
+        </form>
     </div>
 </body>
 </html>
