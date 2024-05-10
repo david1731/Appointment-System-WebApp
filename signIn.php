@@ -18,8 +18,8 @@ function clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $clien
 $clientID = clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $clientCell);
 
 if (!$clientID) {
-    header('Location: crearCuenta.html'); // Redirect to create account page if client does not exist
-    exit;
+    header('Location: crearCuenta.php'); // Redirect to create account page if client does not exist
+    exit();
 }
 ?>
 <!DOCTYPE html>
