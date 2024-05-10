@@ -10,8 +10,9 @@ $appDate = isset($_POST['appDate']) ? $_POST['appDate'] : null;
 $sql = "DELETE FROM appointmentSlots WHERE clientID = '$clientId' AND slotID = '$slotId' AND appDate = '$appDate'";
         
 if ($conn->query($sql) === TRUE) {
-    echo "Cita cancelada correctamente.";
+    $message = "Cita cancelada correctamente.";
 } else {
-    echo "Error al cancelar cita: " . $conn->error;
+    $message =  "Error al cancelar cita: " . $conn->error;
 }
 ?>
+
