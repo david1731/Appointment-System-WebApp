@@ -1,9 +1,17 @@
 <?php
 include 'index.php';
-var_dump($_POST);
+//var_dump($_POST);
 //para borrar la cita de un cliente necesito el appID
 //pero para obtener el appID necesito el clientID, el slot id y la fecha
+$clientId = isset($_POST['clientId']) ? $_POST['clientId'] : null;
+$slotId = isset($_POST['slotID']) ? $_POST['slotID'] : null;
+$appDate = isset($_POST['appDate']) ? $_POST['appDate'] : null;
 
-
-//ejemplo push 
+$sql = "DELETE FROM appointmentSlots WHERE clientID = '$clientId' AND slotID = '$slotId' AND appDate = '$appDate'";
+        
+if ($conn->query($sql) === TRUE) {
+    echo "Cita cancelada correctamente.";
+} else {
+    echo "Error al cancelar cita: " . $conn->error;
+}
 ?>
