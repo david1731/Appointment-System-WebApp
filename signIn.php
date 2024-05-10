@@ -8,6 +8,14 @@
 
     $sql = "SELECT clientID from clients where email = '$clientEmail' and cellphone = '$clientCell' and firstName = '$clientName' and lastName = '$clientLastName'";
     $clientID = $conn->query($sql)->fetch_assoc()['clientID'];
+
+    function clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $clientCell){
+        $query = "SELECT * FROM clients WHERE firstName = '$clientName' AND lastName = '$clientLastName' AND email = '$clientEmail' AND cellphone = '$clientCell'";
+        $result = mysqli_query($conn, $query);
+        return mysqli_num_rows($result) == 0; // devuelve true si el cliente no existe
+    }
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
