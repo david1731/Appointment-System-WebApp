@@ -85,6 +85,7 @@
         <form action="homePage.html">
                 <button type="submit" class="btn btn-primary">Terminar</button>
         </form>
+        
     </div>
 </body>
 </html>

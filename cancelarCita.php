@@ -49,6 +49,12 @@ if ($conn->query($sql) === TRUE) {
         <h1>Cancelacion de Cita</h1>
         <p><?php echo $message; ?></p>
         <div class="d-flex flex-column align-items-center">
+            <form action="verCitas.php" method="post">
+                <input type="hidden" name="clientID" value="<?=$clientId;?>">
+                <button type="submit" class="btn btn-primary">Cancelar Otra Cita</button>
+        </form>
+        </div>
+        <div class="d-flex flex-column align-items-center">
             <form action="homePage.html">
                 <button type="submit" class="btn btn-primary">Terminar</button>
             </form>
