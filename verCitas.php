@@ -3,23 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration Confirmation</title>
-    <link href="crearCuenta.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
-    <style>
-        h1{
-            background-color: white;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Appointment Information</h1>
+        <h1>Tus Citas</h1>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Cliente</th>
+                    <th>Nombre/th>
                     <th>Entrenador</th>
                     <th>Servicio</th>
                     <th>Nivel</th>
@@ -73,9 +66,9 @@
                     echo "<td>" . $appDate . "</td>";
                     echo "<td>" . $appHour . "</td>";
                     echo "<td>";
-                    echo "<form action='cancelarCita.php' method='post'>";
-                    echo "<input type='hidden' name='clientId' value='" . $row['clientID'] . "'>";
-                    echo "<button type='submit' class='btn btn-danger'>Cancelar Cita</button>";
+                    echo "<form action='someAction.php' method='post'>";
+                    echo "<input type='hidden' name='clientId' value='"$clientID"'>";
+                    echo "<button type='submit'>Take Action</button>";
                     echo "</form>";
                     echo "</td>";
                     echo "</tr>";
@@ -86,6 +79,5 @@
     </div>
 </body>
 </html>
-
 
 
