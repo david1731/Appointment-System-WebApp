@@ -1,13 +1,26 @@
 <?php
-    include 'index.php';
-    //var_dump($_POST);
-    $clientName = isset($_POST['name']) ? $conn->real_escape_string($_POST['name']) : 'clientName';
-    $clientLastName = isset($_POST['lastname']) ? $conn->real_escape_string($_POST['lastname']) : 'clientLastName';
-    $clientEmail= isset($_POST['email']) ? $conn->real_escape_string($_POST['email']) : 'default@gmail.com';
-    $clientCell = isset($_POST['cellphone']) ? $conn->real_escape_string($_POST['cellphone']) : 'xxxxxxxx';
+include 'index.php';
+// var_dump($_POST);
+$clientName = isset($_POST['name']) ? $conn->real_escape_string($_POST['name']) : 'clientName';
+$clientLastName = isset($_POST['lastname']) ? $conn->real_escape_string($_POST['lastname']) : 'clientLastName';
+$clientEmail = isset($_POST['email']) ? $conn->real_escape_string($_POST['email']) : 'default@gmail.com';
+$clientCell = isset($_POST['cellphone']) ? $conn->real_escape_string($_POST['cellphone']) : 'xxxxxxxx';
 
-    $sql = "SELECT clientID from clients where email = '$clientEmail' and cellphone = '$clientCell' and firstName = '$clientName' and lastName = '$clientLastName'";
-    $clientID = $conn->query($sql)->fetch_assoc()['clientID'];
+function clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $clientCell) {
+    $query = "SELECT clientID FROM clients WHERE email = '$clientEmail' AND cellphone = '$clientCell' AND firstName = '$clientName' AND lastName = '$clientLastName'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        return mysqli_fetch_assoc($result)['clientID']; // returns clientID if exists
+    }
+    return false;
+}
+
+$clientID = clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $clientCell);
+
+if (!$clientID) {
+    header('Location: crearCuenta.php'); // Redirect to create account page if client does not exist
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
