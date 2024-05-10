@@ -19,7 +19,7 @@ $clientID = clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $cl
 
 if (!$clientID) {
     header('Location: crearCuenta.php'); // Redirect to create account page if client does not exist
-    exit;
+    exit();
 }
 ?>
 <!DOCTYPE html>
