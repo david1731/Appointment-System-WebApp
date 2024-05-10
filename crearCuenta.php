@@ -1,63 +1,75 @@
 <?php
-include 'index.php';
+include 'index.php'; // Assuming this file includes the database connection
 
-// Verify that the form was submitted
+// Define the function to check if a client exists
+function clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $clientCell) {
+    // Properly escape all input to help prevent SQL injection
+    $clientName = $conn->real_escape_string($clientName);
+    $clientLastName = $conn->real_escape_string($clientLastName);
+    $clientEmail = $conn->real_escape_string($clientEmail);
+    $clientCell = $conn->real_escape_string($clientCell);
+
+    $query = "SELECT clientID FROM clients WHERE email = '$clientEmail' AND cellphone = '$clientCell' AND firstName = '$clientName' AND lastName = '$clientLastName'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        return mysqli_fetch_assoc($result)['clientID']; // returns clientID if exists
+    }
+    return false;
+}
+
+// Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Extract user inputs from the form
-    $name = $conn->real_escape_string($_POST['name']);
-    $lastname = $conn->real_escape_string($_POST['lastname']);
-    $email = $conn->real_escape_string($_POST['email']);
-    $cellphone = $conn->real_escape_string($_POST['cellphone']);
+    $clientName = $_POST['name'];
+    $clientLastName = $_POST['lastname'];
+    $clientEmail = $_POST['email'];
+    $clientCell = $_POST['cellphone'];
 
-    // Check if the client already exists
-    function checkIfClientExists($conn, $email, $cellphone) {
-        $query = "SELECT clientId FROM clients WHERE email = '$email' AND cellphone = '$cellphone'";
-        $result = mysqli_query($conn, $query);
-        return mysqli_fetch_assoc($result);
-    }
+    // Check if client already exists
+    $clientID = clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $clientCell);
 
-    $existingClient = checkIfClientExists($conn, $email, $cellphone);
-
-    if ($existingClient) {
-        echo '<html><head><meta http-equiv="refresh" content="5;url=signIn.html"></head>';
-        echo '<body><p>Account already exists. You will be redirected to the Sign In page in 5 seconds...</p></body></html>';
-        exit;
-    }
-
-    // Function to generate a unique client ID
-    function generateUniqueClientId($conn) {
-        $exists = true;
-        $user_id = 0;
-
-        while ($exists) {
-            $user_id = mt_rand(1000, 9999);
-            $query = "SELECT clientId FROM clients WHERE clientId = $user_id";
-            $result = mysqli_query($conn, $query);
-
-            if (mysqli_num_rows($result) == 0) {  // If no rows, the ID is unique
-                $exists = false;
-            }
-        }
-        return $user_id;
-    }
-
-    // Create the client ID
-    $clientID = generateUniqueClientId($conn);
-
-    // Insert the user information into the table
-    $sql = "INSERT INTO clients (clientId, firstName, lastName, email, cellphone) VALUES ($clientID, '$name', '$lastname', '$email', '$cellphone')";
-
-    if ($conn->query($sql) === TRUE) {
-        $message = "Su cuenta se ha creado.";
+    if ($clientID) {
+        // Client exists, redirect to sign in page
+        header('Location: redirectSignUp.html');
+        exit();
     } else {
-        $message = "Error: " . $conn->error;
-    }
+        // Client does not exist, continue with registration
+        // Function to generate a unique client ID
+        function generateUniqueClientId($conn) {
+            $exists = true;
+            $user_id = 0;
 
-    $conn->close();
+            while ($exists) {
+                $user_id = mt_rand(1000, 9999);
+                $query = "SELECT clientId FROM clients WHERE clientId = $user_id";
+                $result = mysqli_query($conn, $query);
+
+                if (mysqli_num_rows($result) == 0) {  // If no rows, the ID is unique
+                    $exists = false;
+                }
+            }
+            return $user_id;
+        }
+
+        // Generate a new unique client ID
+        $newClientID = generateUniqueClientId($conn);
+
+        // Insert the new client into the database
+        $sql = "INSERT INTO clients (clientId, firstName, lastName, email, cellphone) VALUES ('$newClientID', '$clientName', '$clientLastName', '$clientEmail', '$clientCell')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "Su cuenta se ha creado exitosamente.";
+        } else {
+            echo "Error al crear cuenta: " . $conn->error;
+        }
+
+        $conn->close();
+    }
 } else {
-    $message = "Please submit the form.";
+    echo "Por favor, envíe el formulario.";
 }
 ?>
+
 
 
 <!DOCTYPE html>
