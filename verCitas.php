@@ -16,7 +16,6 @@
     <div class="container">
         <h1>Sus citas</h1>
         <table class="table table-striped">
-            <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Entrenador</th>
@@ -26,13 +25,12 @@
                     <th>Hora de Cita</th>
                     <th>Cancelar Cita</th>
                 </tr>
-            </thead>
-            <tbody>
                 <?php
                 include 'index.php';
                 $clientID = isset($_POST['clientID']) ? $conn->real_escape_string($_POST['clientID']) : 'default_client_id';
                 
                 $sql = "SELECT
+                cl.clientID AS ClientID,
                 cl.firstName AS ClientFirstName,
                 cl.lastName AS ClientLastName,
                 tr.trainerName AS TrainerName,
@@ -74,19 +72,17 @@
                     echo "<td>" . $appHour . "</td>";
                     echo "<td>";
                     echo "<form action='cancelarCita.php' method='post'>";
-                    echo "<input type='hidden' name='clientId' value='" . $row['clientID'] . "'>";
+                    echo "<input type='hidden' name='clientId' value=" . $row['ClientID'] . ">";
+                    echo "<input type='hidden' name='slotID' value=" . $row['SlotID'] . ">";
+                    echo "<input type='hidden' name='appDate' value=" . $row['AppointmentDate'] . ">";
                     echo "<button type='submit' class='btn btn-danger'>Cancelar Cita</button>";
                     echo "</form>";
                     echo "</td>";
                     echo "</tr>";
+                    
                 }
                 ?>
-            </tbody>
         </table>
-        <form action='cancelarCita.php' method='post'>
-            <input type='hidden' name='clientId' value="<?=$clientID;?>">
-            <button type='submit' class='btn btn-danger'>Cancelar Cita</button>
-        </form>
     </div>
 </body>
 </html>
