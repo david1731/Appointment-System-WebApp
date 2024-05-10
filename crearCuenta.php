@@ -1,35 +1,49 @@
 <?php
 include 'index.php';
 
-// verificar que el form fue enviado
+// Verify that the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Extraere los user inputs del form
-    $name = $_POST['name'];
-    $lastname = $_POST['lastname'];
-    $email = $_POST['email'];
-    $cellphone = $_POST['cellphone'];
+    // Extract user inputs from the form
+    $name = $conn->real_escape_string($_POST['name']);
+    $lastname = $conn->real_escape_string($_POST['lastname']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $cellphone = $conn->real_escape_string($_POST['cellphone']);
 
-    //Funcion que genera id unico para cada cliente
+    // Check if the client already exists
+    function checkIfClientExists($conn, $email, $cellphone) {
+        $query = "SELECT clientId FROM clients WHERE email = '$email' AND cellphone = '$cellphone'";
+        $result = mysqli_query($conn, $query);
+        return mysqli_fetch_assoc($result);
+    }
+
+    $existingClient = checkIfClientExists($conn, $email, $cellphone);
+
+    if ($existingClient) {
+        header('Location: signIn.html'); // Redirect to sign-in page if client exists
+        exit;
+    }
+
+    // Function to generate a unique client ID
     function generateUniqueClientId($conn) {
         $exists = true;
         $user_id = 0;
 
         while ($exists) {
-            $user_id = mt_rand(1000, 9999);  
+            $user_id = mt_rand(1000, 9999);
             $query = "SELECT clientId FROM clients WHERE clientId = $user_id";
             $result = mysqli_query($conn, $query);
 
-            if (mysqli_num_rows($result) == 0) {  // Si no hay filas, el id es unico
+            if (mysqli_num_rows($result) == 0) {  // If no rows, the ID is unique
                 $exists = false;
             }
         }
         return $user_id;
     }
 
-    // crear el id del cliente
+    // Create the client ID
     $clientID = generateUniqueClientId($conn);
 
-    //Inserta la informacion del usuario a la tabla
+    // Insert the user information into the table
     $sql = "INSERT INTO clients (clientId, firstName, lastName, email, cellphone) VALUES ($clientID, '$name', '$lastname', '$email', '$cellphone')";
 
     if ($conn->query($sql) === TRUE) {
@@ -43,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = "Please submit the form.";
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
