@@ -8,11 +8,8 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <style>
-        h1 {
-            background-color: white;
-        }
-
         div {
+            text-align: center;
             margin: 10px;
         }
     </style>
@@ -20,13 +17,17 @@
 
 <body>
     <div class="container">
-        <h1>Usted no tiene cuenta, registrese</h1>
+        <h1>Cuenta No Existe, Registrese.</h1>
         <div class="d-flex flex-column align-items-center">
             <form action="crearCuenta.html">
                 <button type="submit" class="btn btn-primary">Registrar</button>
             </form>
         </div>
-        <a href="homePage.html" class="button-link">Volver a la página principal</a>
+        <div class="d-flex flex-column align-items-center">
+            <form action="homePage.html">
+                <button type="submit" class="btn btn-primary">Pagina Principal</button>
+            </form>
+        </div>
     </div>
 </body>
 

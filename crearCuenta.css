@@ -19,8 +19,19 @@ p {
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
     text-align: center;
+    height: 100%;
 
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .button-link {
