@@ -26,6 +26,7 @@
         <table class="table table-striped">
                 <tr>
                     <th>Nombre</th>
+                    <th># Telefono Cliente</th>
                     <th>Entrenador</th>
                     <th>Servicio</th>
                     <th>Nivel</th>
@@ -36,7 +37,7 @@
                 <?php
                 // ini_set('display_errors', 1);
                 // error_reporting(E_ALL);
-                // var_dump($_POST);
+                //var_dump($_POST);
                 include 'connection.php';
                 $trainerEmail = isset($_POST['trainerEmail']) ? $conn->real_escape_string($_POST['trainerEmail']) : 'trainerEmail';
                 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']) : 'trainerID';
@@ -44,13 +45,16 @@
                 $sql = "SELECT
                 clients.firstName AS ClientFirstName,
                 clients.lastName AS ClientLastName,
+                clients.cellphone AS ClientCellphone,
                 trainers.trainerName AS TrainerName, 
-                trainers.trainerLastName AS TrainerLastName,             
+                trainers.trainerLastName AS TrainerLastName, 
+                trainers.trainerID AS TrainerID,            
                 service.serviceName AS ServiceName,
                 levels.level AS LevelName,
                 timeSlots.startTime AS AppointmentStartTime,
                 timeSlots.endTime AS AppointmentEndTime,
-                appointmentSlots.appDate AS AppointmentDate
+                appointmentSlots.appDate AS AppointmentDate,
+                appointmentSlots.appID AS AppointmentID
                 FROM
                 appointmentSlots 
                 JOIN clients ON appointmentSlots.clientID = clients.clientID
@@ -65,25 +69,26 @@
                 $res = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_assoc($res)){
                     $clientFullName = $row['ClientFirstName'] . " " . $row['ClientLastName'];
+                    $clientCellphone = $row['ClientCellphone'];
                     $trainerFullName = $row['TrainerName']. " " . $row['TrainerLastName'];
+                    $trainerID = $row['TrainerID'];
                     $service = $row['ServiceName'];
                     $level = $row['LevelName'];
                     $appDate = $row['AppointmentDate'];
                     $appHour = $row['AppointmentStartTime'] . " - " . $row['AppointmentEndTime'];
-                    
+                    $appID = $row['AppointmentID'];
                     echo "<tr>";
                     echo "<td>" . $clientFullName ."</td>";
+                    echo "<td>" . $clientCellphone . "</td>";
                     echo "<td>" . $trainerFullName . "</td>";
                     echo "<td>" . $service . "</td>";
                     echo "<td>" . $level . "</td>";
                     echo "<td>" . $appDate . "</td>";
                     echo "<td>" . $appHour . "</td>";
                     echo "<td>";
-                    echo "<form action='cancelarCita.php' method='post'>";
-                    echo "<input type='hidden' name='clientID' value='$clientID'>";
+                    echo "<form action='trainerCancelarCita.php' method='post'>";
+                    echo "<input type='hidden' name='appID' value='$appID'>";
                     echo "<input type='hidden' name='trainerID' value='$trainerID'>";
-                    echo "<input type='hidden' name='appDate' value='$appDate'>";
-                    echo "<input type='hidden' name='appHour' value='$appHour'>";
                     echo "<button type='submit' class='btn btn-danger'>Cancelar Cita</button>";
                     echo "</form>";
                     echo "</td>";
@@ -92,18 +97,7 @@
                 //que este file lleve al trainer a ver sus citas y que pueda cancelarlas
                 ?>
         </table>
-        <div class="d-flex flex-column align-items-center">
-            <form action="sacarCita.php" method="post">
-                <input type="hidden" name="clientID" value="<?=$clientID;?>">
-                <button type="submit" class="btn btn-primary">Sacar Otra Cita</button>
-            </form>
-        </div>
-
-        <div class="d-flex flex-column align-items-center">
-            <form action="homePage.html">
-                <button type="submit" class="btn btn-primary">Terminar</button>
-            </form>
-        </div>
+       
         
     </div>
 </body>
