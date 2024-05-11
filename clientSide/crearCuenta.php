@@ -1,6 +1,5 @@
 <?php
-include 'index.php'; // Assuming this file includes the database connection
-
+include 'index.php'; 
 // Define the function to check if a client exists
 function clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $clientCell) {
     // Properly escape all input to help prevent SQL injection
@@ -88,6 +87,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         div{
             margin: 10px;
         }
+        .container{
+            text-align: center;
+        }
+        
     </style>
 </head>
 <body>
@@ -97,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>Que desea hacer?</h1>
         <div class="d-flex flex-column align-items-center">
             <form action="sacarCita.php" method="post">
-                <input type="hidden" name="clientID" value="<?=$clientID;?>">
+                <input type="hidden" name="clientID" value="<?=$newClientID;?>">
                 <button type="submit" class="btn btn-primary">Sacar Cita</button>
             </form>
         </div>

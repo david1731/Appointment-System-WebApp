@@ -39,7 +39,7 @@ $clientID = isset($_POST['clientID']) ? $conn->real_escape_string($_POST['client
 <div class="container mt-5">
     <h2>Separa tu cita</h2>
     <form action="confirmarCita.php" method="post">
-        <input type="hidden" name="clientID" value="<?= $clientID; ?>">
+        <input type="hidden" name="clientID" value="<?=$clientID;?>">
         <div class="mb-3">
             <label for="timeSlot" class="form-label">Seleccione una hora:</label>
             <select name="slotID" class="form-select">
