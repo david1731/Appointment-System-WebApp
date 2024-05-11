@@ -45,7 +45,8 @@
                 clients.firstName AS ClientFirstName,
                 clients.lastName AS ClientLastName,
                 trainers.trainerName AS TrainerName, 
-                trainers.trainerLastName AS TrainerLastName,             
+                trainers.trainerLastName AS TrainerLastName, 
+                trainers.trainerID AS TrainerID,            
                 service.serviceName AS ServiceName,
                 levels.level AS LevelName,
                 timeSlots.startTime AS AppointmentStartTime,
@@ -67,6 +68,7 @@
                 while($row = mysqli_fetch_assoc($res)){
                     $clientFullName = $row['ClientFirstName'] . " " . $row['ClientLastName'];
                     $trainerFullName = $row['TrainerName']. " " . $row['TrainerLastName'];
+                    $trainerID = $row['TrainerID'];
                     $service = $row['ServiceName'];
                     $level = $row['LevelName'];
                     $appDate = $row['AppointmentDate'];
@@ -82,6 +84,7 @@
                     echo "<td>";
                     echo "<form action='trainerCancelarCita.php' method='post'>";
                     echo "<input type='hidden' name='appID' value='$appID'>";
+                    echo "<input type='hidden' name='trainerID' value='$trainerID'>";
                     echo "<button type='submit' class='btn btn-danger'>Cancelar Cita</button>";
                     echo "</form>";
                     echo "</td>";
