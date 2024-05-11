@@ -57,15 +57,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO clients (clientId, firstName, lastName, email, cellphone) VALUES ('$newClientID', '$clientName', '$clientLastName', '$clientEmail', '$clientCell')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "Su cuenta se ha creado exitosamente.";
+            $message = "Su cuenta se ha creado exitosamente.";
         } else {
-            echo "Error al crear cuenta: " . $conn->error;
+            $message = "Error al crear cuenta: " . $conn->error;
         }
 
         $conn->close();
     }
 } else {
-    echo "Por favor, envíe el formulario.";
+    $message = "Por favor, envíe el formulario.";
 }
 ?>
 
