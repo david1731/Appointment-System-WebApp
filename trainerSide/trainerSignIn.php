@@ -26,6 +26,7 @@
         <table class="table table-striped">
                 <tr>
                     <th>Nombre</th>
+                    <th># Telefono Cliente</th>
                     <th>Entrenador</th>
                     <th>Servicio</th>
                     <th>Nivel</th>
@@ -44,6 +45,7 @@
                 $sql = "SELECT
                 clients.firstName AS ClientFirstName,
                 clients.lastName AS ClientLastName,
+                clients.cellphone AS ClientCellphone,
                 trainers.trainerName AS TrainerName, 
                 trainers.trainerLastName AS TrainerLastName, 
                 trainers.trainerID AS TrainerID,            
@@ -67,6 +69,7 @@
                 $res = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_assoc($res)){
                     $clientFullName = $row['ClientFirstName'] . " " . $row['ClientLastName'];
+                    $clientCellphone = $row['ClientCellphone'];
                     $trainerFullName = $row['TrainerName']. " " . $row['TrainerLastName'];
                     $trainerID = $row['TrainerID'];
                     $service = $row['ServiceName'];
@@ -76,6 +79,7 @@
                     $appID = $row['AppointmentID'];
                     echo "<tr>";
                     echo "<td>" . $clientFullName ."</td>";
+                    echo "<td>" . $clientCellphone . "</td>";
                     echo "<td>" . $trainerFullName . "</td>";
                     echo "<td>" . $service . "</td>";
                     echo "<td>" . $level . "</td>";
