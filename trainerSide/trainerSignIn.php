@@ -5,4 +5,6 @@ include 'connection.php';
 $trainerName = isset($_POST['trainerName']) ? $conn->real_escape_string($_POST['trainerName']) : 'trainerName';
 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']) : 'trainerID';
 
+echo $trainerName;
+echo $trainerID;
 ?>
