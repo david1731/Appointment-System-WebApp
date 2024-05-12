@@ -3,47 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Disponibilidad de Horas</title>
-    <link href="crearCuenta.css" rel="stylesheet">
+    <link href="tablaHoras.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        html, body {
-            height: 100%;
-        }
-
-        h1{
-            background-color:white;
-        }
-
-        div{
-            margin: 10px;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
         <h1>Disponibilidad de horas</h1>
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered">
                 <tr>
                     <th>Hora</th>
                     <th>Status</th>
                     <th>Cambiar Disponibilidad</th>
                 </tr>
                 <?php
-                ini_set('display_errors', 1);
-                error_reporting(E_ALL);
-                include "connection.php";
+                include 'connection.php';
 
-                $query "SELECT slotID, startTime, endTime, status FROM timeSlots";
+                $query = "SELECT slotID, startTime, endTime, statusHora FROM timeSlots";
                 $result = mysqli_query($conn, $query);
                 while($row = mysqli_fetch_assoc($result)) {
                     $hora = $row['startTime'] . " - " . $row['endTime'];
-                    $status = $row['status'];
+                    $status = $row['statusHora'];
                     
                     echo "<tr>";
                     echo "<td>" . $hora ."</td>";
                     echo "<td>" . $status . "</td>";
-                    echo "<td>";
+                    echo "<td class = horizontal-buttons>";
                     echo "<form action='cambiaDispo.php' method='post'>";
                     echo "<input type='hidden' name='slotID' value=" . $row['slotID'] . ">";
                     echo "<button type='submit' class='btn btn-success'>Disponible</button>";
@@ -69,7 +54,6 @@
                 <button type="submit" class="btn btn-primary">Terminar</button>
             </form>
         </div>
-        
     </div>
 </body>
 </html>
