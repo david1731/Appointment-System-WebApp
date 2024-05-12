@@ -50,7 +50,7 @@
         </div>
 
         <div class="d-flex flex-column align-items-center">
-            <form action="homePage.html">
+            <form action="trainerSignIn.php">
                 <button type="submit" class="btn btn-primary">Terminar</button>
             </form>
         </div>
