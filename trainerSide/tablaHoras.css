@@ -1,0 +1,42 @@
+html,
+body {
+    height: 100%;
+}
+
+h1 {
+    background-color: white;
+}
+
+div {
+    margin: 10px;
+}
+
+.horizontal-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.horizontal-buttons form {
+    margin-right: 2px;
+}
+
+td {
+    text-align: center;
+    /* Centers all table headers */
+}
+
+table.table th {
+    text-align: center !important;
+
+}
+
+th:nth-child(3) {
+    width: 30%;
+    /* Smaller width for 'Cambiar Disponibilidad' */
+}
+
+th:nth-child(1),
+th:nth-child(2) {
+    width: 30%;
+    /* Equal width for the other two columns */
+}

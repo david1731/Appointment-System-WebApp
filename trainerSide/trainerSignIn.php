@@ -39,9 +39,16 @@ $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trai
         </div>
 
         <div class="d-flex flex-column align-items-center">
-            <form action="" method="post">
+            <form action="despliegaHoras.php" method="post">
                 <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
                 <button type="submit" class="btn btn-primary">Modificar Horas</button>
+            </form>
+        </div>
+
+        <div class="d-flex flex-column align-items-center">
+            <form action="modificarDias.php" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
+                <button type="submit" class="btn btn-primary">Modificar Dias</button>
             </form>
         </div>
     </div>
