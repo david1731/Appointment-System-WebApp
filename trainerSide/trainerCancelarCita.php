@@ -43,7 +43,7 @@ if ($conn->query($sql) === TRUE) {
         <h1>Cancelacion de Cita</h1>
         <p><?php echo $message; ?></p>
         <div class="d-flex flex-column align-items-center">
-            <form action="trainerSignIn.php" method="post">
+            <form action="trainerCitas.php" method="post">
                 <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
                 <button type="submit" class="btn btn-primary">Cancelar Otra Cita</button>
         </form>
