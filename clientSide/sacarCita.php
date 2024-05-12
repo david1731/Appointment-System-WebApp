@@ -3,7 +3,7 @@
 include 'index.php'; 
 
 // extraer la data que se va usar 
-$timeSlotsQuery = "SELECT slotID, startTime, endTime FROM timeSlots WHERE status = 'Disponible'";
+$timeSlotsQuery = "SELECT slotID, startTime, endTime FROM timeSlots WHERE statusHora = 'Disponible'";
 $timeSlotsResult = $conn->query($timeSlotsQuery);
 
 $servicesQuery = "SELECT serviceID, serviceName FROM service";
