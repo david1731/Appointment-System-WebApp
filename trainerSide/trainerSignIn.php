@@ -2,6 +2,20 @@
 include 'connection.php';
 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']): 'trainerID';
 
+function validarTrainer($conn, $trainerID) {
+    $query = "SELECT trainerID FROM trainers WHERE trainerID = '$trainerID'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        return true;
+    }
+    return false;
+}
+
+$validTrainer = validarTrainer($conn, $trainerID);
+if (!$validTrainer) {
+    header('Location: trainerSignIn.html');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
