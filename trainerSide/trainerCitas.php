@@ -23,7 +23,7 @@
         <h1>Sus citas</h1>
         <table class="table table-striped">
                 <tr>
-                    <th>Nombre</th>
+                    <th>Cliente</th>
                     <th># Telefono Cliente</th>
                     <th>Entrenador</th>
                     <th>Servicio</th>
