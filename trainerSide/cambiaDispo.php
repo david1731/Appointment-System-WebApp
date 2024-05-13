@@ -1,8 +1,9 @@
 <?php
 include 'connection.php';
+
 //Cambiar cita de No disponible a Disponible
 $slotID = isset($_POST['slotID']) ? $_POST['slotID'] : null;
-
+$trainerID = isset($_POST['trainerID']) ? $_POST['trainerID'] : null;
 $sql = "UPDATE timeSlots SET statusHora = 'Disponible' WHERE slotID = '$slotID'";
 
 if ($conn->query($sql) === TRUE) {
@@ -46,11 +47,12 @@ if ($conn->query($sql) === TRUE) {
         <p><?php echo $message; ?></p>
         <div class="d-flex flex-column align-items-center">
             <form action="despliegaHoras.php" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
                 <button type="submit" class="btn btn-primary">Editar Otra Hora</button>
         </form>
         </div>
         <div class="d-flex flex-column align-items-center">
-            <form action="homePage.html">
+            <form action="trainerSignIn.html">
                 <button type="submit" class="btn btn-primary">Terminar</button>
             </form>
         </div>

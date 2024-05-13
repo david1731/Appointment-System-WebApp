@@ -1,5 +1,6 @@
 <?php
 include 'connection.php';
+
 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']): 'trainerID';
 
 function validarTrainer($conn, $trainerID) {
