@@ -1,6 +1,7 @@
 <?php 
-$fecha = isset($_POST['fecha']) ? $_POST['fecha'] : null;
-echo $fecha;
+include 'connection.php';
+$fecha = isset($_POST['fecha']) ? $_POST['fecha'] : 'Mes/Dia/Año';
+$trainerID = isset($_POST['trainerID']) ? $_POST['trainerID'] : 00000;
 
 $sql = "DELETE FROM fechas WHERE fecha = '$fecha'";
 
@@ -42,16 +43,22 @@ if ($conn->query($sql) === TRUE) {
 </head>
 <body>
     <div class="container">
-        <h1>Cancelación de Cita</h1>
+        <h1>Eliminación de Dias</h1>
         <p><?php echo $message; ?></p>
         <div class="d-flex flex-column align-items-center">
-            <form action="verCitas.php" method="post">
-                <input type="hidden" name="clientID" value="<?=$clientId;?>">
-                <button type="submit" class="btn btn-primary">Cancelar Otra Cita</button>
-        </form>
+            <form action="modificarDias.php" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
+                <button type="submit" class="btn btn-primary">Eliminar Otro Día</button>
+            </form>
         </div>
         <div class="d-flex flex-column align-items-center">
-            <form action="homePage.html">
+            <form action="trainerSignIn.php" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
+                <button type="submit" class="btn btn-primary">Volver a Menu</button>
+            </form>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <form action="trainerSignIn.html">
                 <button type="submit" class="btn btn-primary">Terminar</button>
             </form>
         </div>
