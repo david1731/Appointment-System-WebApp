@@ -1,7 +1,7 @@
 <?php 
 include 'connection.php';
 
-var_dump($_POST);
+//var_dump($_POST);
 //Fetch trainerID from post
 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']): 'trainerID';
 $fecha = isset($_POST['fecha']) ? $conn->real_escape_string($_POST['fecha']): 'fecha';

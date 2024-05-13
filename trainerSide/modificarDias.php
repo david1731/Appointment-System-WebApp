@@ -55,8 +55,9 @@
                 echo "<tr>";
                 echo "<td>" . $fecha ."</td>";
                 echo "<td class = horizontal-buttons>";
-                echo "<form action='eliminarDia.php' method='post'>";
+                echo "<form action='eliminarDias.php' method='post'>";
                 echo "<input type='hidden' name='fecha' value=" . $row['fecha'] . ">";
+                echo "<input type='hidden' name='trainerID' value='$trainerID'>";
                 echo "<button type='submit' class='btn btn-danger'>Eliminar</button>";
                 echo "</form>";
                 echo "</td>";
