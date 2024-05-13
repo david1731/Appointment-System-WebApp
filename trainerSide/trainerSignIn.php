@@ -53,15 +53,13 @@ if (!$validTrainer) {
         </div>
 
         <div class="d-flex flex-column align-items-center">
-            <form action="despliegaHoras.php" method="post">
-                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
+            <form action="despliegaHoras.php">
                 <button type="submit" class="btn btn-primary">Modificar Horas</button>
             </form>
         </div>
 
         <div class="d-flex flex-column align-items-center">
-            <form action="modificarDias.php" method="post">
-                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
+            <form action="modificarDias.php">
                 <button type="submit" class="btn btn-primary">Modificar Dias</button>
             </form>
         </div>
