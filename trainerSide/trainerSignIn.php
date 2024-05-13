@@ -1,5 +1,6 @@
 <?php
 include 'connection.php';
+
 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']): 'trainerID';
 
 function validarTrainer($conn, $trainerID) {
@@ -53,13 +54,15 @@ if (!$validTrainer) {
         </div>
 
         <div class="d-flex flex-column align-items-center">
-            <form action="despliegaHoras.php">
+            <form action="despliegaHoras.php" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
                 <button type="submit" class="btn btn-primary">Modificar Horas</button>
             </form>
         </div>
 
         <div class="d-flex flex-column align-items-center">
-            <form action="modificarDias.php">
+            <form action="modificarDias.php" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
                 <button type="submit" class="btn btn-primary">Modificar Dias</button>
             </form>
         </div>

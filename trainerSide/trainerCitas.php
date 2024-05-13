@@ -96,7 +96,8 @@
                 ?>
         </table>
         <div class="d-flex flex-column align-items-center">
-            <form action="trainerSignIn.php">
+            <form action="trainerSignIn.php" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
                 <button type="submit" class="btn btn-primary">Volver a Menu</button>
             </form>
         </div>

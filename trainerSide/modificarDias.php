@@ -14,27 +14,17 @@
         .container {
             margin-top: 100px;
         }
+        .btn-primary{
+            margin-left: 10px;
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 
 <body>
-    <!-- user input to modify available days -->
-    <div class="container">
-        <h2>Modificar Dias</h2>
-        <form action="añadirDia.php" method="post">
-            <div class="row mb-3">
-                <div class="col-6">
-                    <label for="name" class="form-label">Fecha:</label>
-                    <input type="text" name="fecha" placeholder="Mes/Dia/Año" class="form-control" required>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Modificar Dias</button>
-        </form>
-    </div>
-
     <!--- Display table of available days to cancel --->
     <div class="container">
-        <h2>Eliminar Dias</h2>
+        
         <table class="table table-striped table-bordered">
             <tr>
                 <th>Fecha</th>
@@ -42,9 +32,23 @@
             </tr>
             <?php
             include 'connection.php';
-
+            $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']) : 'trainerID'; //not being used but is needed for the form
             $query = "SELECT fecha FROM fechas";
             $result = mysqli_query($conn, $query);
+            echo "<div class='container'>";
+            echo "<h2>Modificar Dias</h2>";
+            echo "<form action='añadirDia.php' method='post'>";
+            echo "<div class='row mb-3'>";
+            echo "<div class='col-6'>";
+            echo "<label for='name' class='form-label'>Fecha:</label>";
+            echo "<input type='hidden' name='trainerID' value='$trainerID'>";
+            echo "<input type='text' name='fecha' placeholder='Mes/Dia/Año' class='form-control' required>";
+            echo "</div>";
+            echo "</div>";
+            echo "<button type='submit' class='btn btn-primary'>Modificar Dias</button>";
+            echo "</form>";
+            echo "</div>";
+            echo "<h2>Eliminar Dias</h2>";
             while($row = mysqli_fetch_assoc($result)) {
                 $fecha = $row['fecha'];
                 
@@ -60,8 +64,22 @@
             }
             ?>
         </table>
-        
+
+        <div class="d-flex flex-column align-items-center">
+            <form action="trainerSignIn.php" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
+                <button type="submit" class="btn btn-primary">Volver a Menu</button>
+            </form>
+        </div>
+
+        <div class="d-flex flex-column align-items-center">
+            <form action="trainerSignIn.html" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
+                <button type="submit" class="btn btn-primary">Terminar</button>
+            </form>
+        </div>
     </div>
+        
 </body>
 
 </html>

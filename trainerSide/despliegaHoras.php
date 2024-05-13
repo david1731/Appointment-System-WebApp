@@ -18,6 +18,7 @@
                 </tr>
                 <?php
                 include 'connection.php';
+                $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']) : 'trainerID'; //not being used but is needed for the form 
 
                 $query = "SELECT slotID, startTime, endTime, statusHora FROM timeSlots";
                 $result = mysqli_query($conn, $query);
@@ -43,14 +44,15 @@
                 ?>
         </table>
         <div class="d-flex flex-column align-items-center">
-            <form action="despliegaHoras.php">
-                <input type="hidden">
-                <button type="submit" class="btn btn-primary">Editar Horas</button>
+            <form action="trainerSignIn.php" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
+                <button type="submit" class="btn btn-primary">Volver a Menu</button>
             </form>
         </div>
 
         <div class="d-flex flex-column align-items-center">
-            <form action="trainerSignIn.php">
+            <form action="trainerSignIn.html" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
                 <button type="submit" class="btn btn-primary">Terminar</button>
             </form>
         </div>

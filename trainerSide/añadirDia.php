@@ -1,6 +1,9 @@
 <?php 
 include 'connection.php';
 
+var_dump($_POST);
+//Fetch trainerID from post
+$trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']): 'trainerID';
 $fecha = isset($_POST['fecha']) ? $conn->real_escape_string($_POST['fecha']): 'fecha';
 $query = "INSERT INTO fechas (fecha) VALUES ('$fecha')";
 
@@ -41,6 +44,25 @@ $conn->close();
         <!--Modificar otro dia --->
         <!--Volver a menu --->
         <!--Terminar--->
+        <div class="d-flex flex-column align-items-center">
+            <form action="modificarDias.php" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
+                <button type="submit" class="btn btn-primary">Modificar Otro Dia</button>
+            </form>
+        </div>
+
+        <div class="d-flex flex-column align-items-center">
+            <form action="trainerSignIn.php" method="post">
+                <input type="hidden" name="trainerID" value="<?=$trainerID;?>">
+                <button type="submit" class="btn btn-primary">Volver a Menu</button>
+            </form>
+        </div>
+
+        <div class="d-flex flex-column align-items-center">
+            <form action="trainerSignIn.html">
+                <button type="submit" class="btn btn-primary">Terminar</button>
+            </form>
+        </div>
 
     </div>
 </body>
