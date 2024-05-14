@@ -43,7 +43,7 @@ if ($conn->query($sql) === TRUE) {
 </head>
 <body>
     <div class="container">
-        <h1>Cambio de Status</h1>
+        <h1 class="display-1">Cambio de Status</h1>
         <p><?php echo $message; ?></p>
         <div class="d-flex flex-column align-items-center">
             <form action="despliegaHoras.php" method="post">
