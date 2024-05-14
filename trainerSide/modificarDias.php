@@ -31,6 +31,7 @@
                 <th>Eliminar</th>
             </tr>
             <?php
+            //var_dump($_POST);
             include 'connection.php';
             $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']) : 'trainerID'; //not being used but is needed for the form
             $query = "SELECT fecha FROM fechas";

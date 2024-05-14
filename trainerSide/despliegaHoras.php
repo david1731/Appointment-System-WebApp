@@ -19,6 +19,7 @@
                 </tr>
                 <?php
                 include 'connection.php';
+                //var_dump($_POST);
                 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']) : 'trainerID'; //not being used but is needed for the form 
 
                 $query = "SELECT slotID, startTime, endTime, statusHora FROM timeSlots";
@@ -33,10 +34,12 @@
                     echo "<td class = horizontal-buttons>";
                     echo "<form action='cambiaDispo.php' method='post'>";
                     echo "<input type='hidden' name='slotID' value=" . $row['slotID'] . ">";
+                    echo "<input type='hidden' name='trainerID' value='$trainerID'>";
                     echo "<button type='submit' class='btn btn-success'>Disponible</button>";
                     echo "</form>";
                     echo "<form action='cambiaNoDispo.php' method='post'>";
                     echo "<input type='hidden' name='slotID' value=" . $row['slotID'] . ">";
+                    echo "<input type='hidden' name='trainerID' value='$trainerID'>";
                     echo "<button type='submit' class='btn btn-danger'>No Disponible</button>";
                     echo "</form>";
                     echo "</td>";
