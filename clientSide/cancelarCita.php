@@ -3,9 +3,10 @@ include 'index.php';
 //var_dump($_POST);
 //para borrar la cita de un cliente necesito el appID
 //pero para obtener el appID necesito el clientID, el slot id y la fecha
-$clientId = isset($_POST['clientId']) ? $_POST['clientId'] : null;
+$clientId = isset($_POST['clientId']) ? $_POST['clientId'] : 0000;
 $slotId = isset($_POST['slotID']) ? $_POST['slotID'] : null;
 $appDate = isset($_POST['appDate']) ? $_POST['appDate'] : null;
+
 
 $sql = "DELETE FROM appointmentSlots WHERE clientID = '$clientId' AND slotID = '$slotId' AND appDate = '$appDate'";
         
@@ -47,13 +48,16 @@ if ($conn->query($sql) === TRUE) {
 </head>
 <body>
     <div class="container">
-        <h1>Cancelación de Cita</h1>
+        <h1 class="display-1">Cancelación de Cita</h1>
         <p><?php echo $message; ?></p>
-        <div class="d-flex flex-column align-items-center">
-            <form action="verCitas.php" method="post">
-                <input type="hidden" name="clientID" value="<?=$clientId;?>">
-                <button type="submit" class="btn btn-primary">Cancelar Otra Cita</button>
-        </form>
+        <div class="card" style="width: 18rem;">
+            <img src="cancelarCita.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <form action="verCitas.php" method="post">
+                    <input type="hidden" name="clientID" value="<?=$clientId;?>">
+                    <button type="submit" class="btn btn-primary">Cancelar Otra Cita</button>
+                </form>
+            </div>
         </div>
         <div class="d-flex flex-column align-items-center">
             <form action="homePage.html">

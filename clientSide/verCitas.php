@@ -36,7 +36,8 @@
                 </tr>
                 <?php
                 include 'index.php';
-                $clientID = isset($_POST['clientID']) ? $conn->real_escape_string($_POST['clientID']) : 'default_client_id';
+                //var_dump($_POST);
+                $clientID = isset($_POST['clientID']) ? $conn->real_escape_string($_POST['clientID']) : 0000;
                 
                 $sql = "SELECT
                 cl.clientID AS ClientID,
@@ -91,11 +92,14 @@
                 }
                 ?>
         </table>
-        <div class="d-flex flex-column align-items-center">
-            <form action="sacarCita.php" method="post">
-                <input type="hidden" name="clientID" value="<?=$clientID;?>">
-                <button type="submit" class="btn btn-primary">Sacar Otra Cita</button>
-            </form>
+        <div class="card" style="width: 18rem;">
+            <img src="verCitas.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <form action="sacarCita.php" method="post">
+                    <input type="hidden" name="clientID" value="<?=$clientID;?>">
+                    <button type="submit" class="btn btn-primary">Sacar Otra Cita</button>
+                </form>
+            </div>
         </div>
 
         <div class="d-flex flex-column align-items-center">
