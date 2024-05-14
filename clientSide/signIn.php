@@ -25,7 +25,7 @@ if (!$clientID) {
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <title>Info del Cliente</title>
+    <title>Menu de Opciones</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -33,38 +33,51 @@ if (!$clientID) {
     <style>
         html, body {
             height: 100%;
+            margin: 0; /* Ensure there is no default margin */
         }
         .container {
-            height: 100%;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            height: calc(100% - 40px); /* Adjust height to account for h1 */
         }
-        div{
-            margin: 10px;
+        h1 {
+            text-align: center;
+            width: 100%; /* Ensure it spans the full width */
+            position: absolute; /* Position it absolutely within the body */
+            top: 0; /* Align it at the top */
+            margin-top: 350px; /* Provide some space from the top */
         }
+        .card {
+            margin: 10px; /* Maintain margin for separation */
+        }
+        
     </style>
 </head>
 <body>
+    <h1 class="display-1">¿Que desea hacer?</h1>
     <div class="container">
-        <h1>Que desea hacer?</h1>
-        <div class="d-flex flex-column align-items-center">
-            <form action="sacarCita.php" method="post">
-                <input type="hidden" name="clientID" value="<?=$clientID;?>">
-                <button type="submit" class="btn btn-primary">Sacar Cita</button>
-            </form>
+
+        <div class="card" style="width: 18rem;">
+            <img src="verCitas.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <form action="sacarCita.php" method="post">
+                    <input type="hidden" name="clientID" value="<?=$clientID;?>">
+                    <button type="submit" class="btn btn-primary">Sacar Cita</button>
+                </form>
+            </div>
         </div>
 
-        <div class="d-flex flex-column align-items-center">
-            <form action="verCitas.php" method="post">
-                <input type="hidden" name="clientID" value="<?=$clientID;?>">
-                <button type="submit" class="btn btn-primary">Ver/Cancelar Mis Citas</button>
-            </form>
+        <div class="card" style="width: 18rem;">
+            <img src="cancelarCita.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <form action="verCitas.php" method="post">
+                    <input type="hidden" name="clientID" value="<?=$clientID;?>">
+                    <button type="submit" class="btn btn-primary">Ver/Cancelar Mis Citas</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
 </html>
-
-
 
