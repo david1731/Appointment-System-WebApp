@@ -62,7 +62,7 @@ function generateUniqueAppId($conn) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <title>Confirmacion de Cita</title>
     <link href="crearCuenta.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -78,6 +78,12 @@ function generateUniqueAppId($conn) {
             justify-content: center;
             align-items: center;
         }
+        .container1 {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
 
         h1{
             background-color:white;
@@ -90,22 +96,31 @@ function generateUniqueAppId($conn) {
 </head>
 <body>
     <div class="container">
-        <h1>Confirmación de cita</h1>
+        <h1 class="display-1">Confirmación de cita</h1>
         <p><?php echo $message; ?></p>
+        
+        <div class="container1">
+            <div class="card" style="width: 18rem;">
+                <img src="verCitas.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <form action="sacarCita.php" method="post">
+                        <input type="hidden" name="clientID" value="<?=$clientID;?>">
+                        <button type="submit" class="btn btn-primary">Sacar Cita</button>
+                    </form>
+                </div>
+            </div>
 
-        <div class="d-flex flex-column align-items-center">
-            <form action="sacarCita.php" method="post">
-                <input type="hidden" name="clientID" value="<?=$clientID;?>">
-                <button type="submit" class="btn btn-primary">Sacar Cita</button>
-            </form>
+            <div class="card" style="width: 18rem;">
+                <img src="cancelarCita.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <form action="verCitas.php" method="post">
+                        <input type="hidden" name="clientID" value="<?=$clientID;?>">
+                        <button type="submit" class="btn btn-primary">Ver/Cancelar Mis Citas</button>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="d-flex flex-column align-items-center">
-            <form action="verCitas.php" method="post">
-                <input type="hidden" name="clientID" value="<?=$clientID;?>">
-                <button type="submit" class="btn btn-primary">Ver/Cancelar Mis Citas</button>
-            </form>
-        </div>
+        
 
         <div class="d-flex flex-column align-items-center">
             <form action="homePage.html">

@@ -1,7 +1,7 @@
 <?php
 // Database connection setup
 include 'index.php'; 
-
+//var_dump($_POST);
 // extraer la data que se va usar 
 $timeSlotsQuery = "SELECT slotID, startTime, endTime FROM timeSlots WHERE statusHora = 'Disponible'";
 $timeSlotsResult = $conn->query($timeSlotsQuery);
