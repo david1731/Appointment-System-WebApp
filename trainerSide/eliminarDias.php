@@ -1,5 +1,6 @@
 <?php 
 include 'connection.php';
+//var_dump($_POST);
 $fecha = isset($_POST['fecha']) ? $_POST['fecha'] : 'Mes/Dia/Año';
 $trainerID = isset($_POST['trainerID']) ? $_POST['trainerID'] : 00000;
 

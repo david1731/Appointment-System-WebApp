@@ -1,5 +1,6 @@
 <?php
 include 'connection.php';
+//var_dump($_POST);
 //Cambiar cita de Disponible a No Disponible
 $slotID = isset($_POST['slotID']) ? $_POST['slotID'] : null;
 $trainerID = isset($_POST['trainerID']) ? $_POST['trainerID'] : null;
