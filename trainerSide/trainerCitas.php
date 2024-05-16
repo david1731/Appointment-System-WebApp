@@ -38,9 +38,11 @@
                 // error_reporting(E_ALL);
                 //var_dump($_POST);
                 include 'connection.php';
+                //retrieve data from post
                 $trainerEmail = isset($_POST['trainerEmail']) ? $conn->real_escape_string($_POST['trainerEmail']) : 'trainerEmail';
                 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']) : 'trainerID';
-
+                
+                //select necesarry information to display a trainer's appointments
                 $sql = "SELECT
                 clients.firstName AS ClientFirstName,
                 clients.lastName AS ClientLastName,
@@ -65,7 +67,9 @@
                 appointmentSlots.appDate, timeSlots.startTime;
                 ";
 
+                //execute query
                 $res = mysqli_query($conn, $sql);
+                //display appointments
                 while($row = mysqli_fetch_assoc($res)){
                     $clientFullName = $row['ClientFirstName'] . " " . $row['ClientLastName'];
                     $clientCellphone = $row['ClientCellphone'];

@@ -4,20 +4,23 @@
 //var_dump($_POST);
 include 'index.php';
 
+//exectute only if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //retrieve the clientID, slotID, serviceID, levelID, trainerID and date from the POST request
     $clientID = $conn->real_escape_string($_POST['clientID']);
     $slotID = $conn->real_escape_string($_POST['slotID']);
     $serviceID = $conn->real_escape_string($_POST['serviceID']);
     $levelID = $conn->real_escape_string($_POST['levelID']);
     $trainerID = $conn->real_escape_string($_POST['trainerID']);
-    $date = $conn->real_escape_string($_POST['fecha']);
+    $date = $conn->real_escape_string($_POST['fecha']): "Fecha Vacia";
 
-    // Verificar si la cita está disponible
+    // Check if appointment slot is available
     if (verificarCita($conn, $slotID, $date)) {
-        $app_id = generateUniqueAppId($conn);
-        $stmt = $conn->prepare("INSERT INTO appointmentSlots (appID, slotID, clientID, levelID, trainerID, serviceID, appDate) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param('iiiiiis', $app_id, $slotID, $clientID, $levelID, $trainerID, $serviceID, $date);
+        $app_id = generateUniqueAppId($conn); // Generate a unique appointment ID
+        $stmt = $conn->prepare("INSERT INTO appointmentSlots (appID, slotID, clientID, levelID, trainerID, serviceID, appDate) VALUES (?, ?, ?, ?, ?, ?, ?)"); // Prepare an insert statement
+        $stmt->bind_param('iiiiiis', $app_id, $slotID, $clientID, $levelID, $trainerID, $serviceID, $date); // Bind variables to the prepared statement as parameters
         
+        // Attempt to execute the prepared statement
         if ($stmt->execute()) {
             $message = "Su cita ha sido confirmada";
         } else {
@@ -26,31 +29,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $stmt->close();
     } else {
+        // If the appointment slot is not available
         $message = "La hora seleccionada ya está ocupada. Por favor, elija otra hora.";
-        // Aquí podrías agregar un redireccionamiento o algún mecanismo para reintentar.
-    }
+       }
     
     $conn->close();
 } else {
     $message = "Oops, hubo un problema.";
 }
 
+//function to check if the appointment slot is available
 function verificarCita($conn, $slotID, $date){
-    $query = "SELECT * FROM appointmentSlots WHERE slotID = $slotID AND appDate = '$date'";
-    $result = mysqli_query($conn, $query);
-    return mysqli_num_rows($result) == 0; // devuelve false si la cita ya está ocupada
+    $query = "SELECT * FROM appointmentSlots WHERE slotID = $slotID AND appDate = '$date'"; // Query to check if the appointment slot is available
+    $result = mysqli_query($conn, $query); // Execute the query
+    return mysqli_num_rows($result) == 0; // returns ture if the query returns 0 rows, the appointment slot is available or false if the query returns more than 0 rows, the appointment slot is not available
 }
 
+//function to generate a unique appointment ID
 function generateUniqueAppId($conn) {
     $exists = true;
-    $app_id = 0;
+    $app_id = 0; //id initiliazed to 0
 
     while ($exists) {
-        $app_id = mt_rand(100000, 999999);
-        $query = "SELECT appID FROM appointmentSlots WHERE appID = $app_id";
-        $result = mysqli_query($conn, $query);
+        $app_id = mt_rand(100000, 999999); //built in function to generate random number in the given range
+        $query = "SELECT appID FROM appointmentSlots WHERE appID = $app_id"; // Query to check if the appointment ID already exists
+        $result = mysqli_query($conn, $query); //exectue the query and store the result in $result
 
-        if (mysqli_num_rows($result) == 0) {
+        if (mysqli_num_rows($result) == 0) { //if the query returns 0 rows, the appointment ID is unique
             $exists = false;
         }
     }

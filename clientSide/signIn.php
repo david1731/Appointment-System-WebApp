@@ -1,23 +1,27 @@
 <?php
 include 'index.php';
 // var_dump($_POST);
+
+//retrieve data sent via post method
 $clientName = isset($_POST['name']) ? $conn->real_escape_string($_POST['name']) : 'clientName';
 $clientLastName = isset($_POST['lastname']) ? $conn->real_escape_string($_POST['lastname']) : 'clientLastName';
 $clientEmail = isset($_POST['email']) ? $conn->real_escape_string($_POST['email']) : 'default@gmail.com';
 $clientCell = isset($_POST['cellphone']) ? $conn->real_escape_string($_POST['cellphone']) : 'xxxxxxxx';
 
+//function to validate if a client truly exists upon login
 function clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $clientCell) {
-    $query = "SELECT clientID FROM clients WHERE email = '$clientEmail' AND cellphone = '$clientCell' AND firstName = '$clientName' AND lastName = '$clientLastName'";
+    $query = "SELECT clientID FROM clients WHERE email = '$clientEmail' AND cellphone = '$clientCell' AND firstName = '$clientName' AND lastName = '$clientLastName'"; //query to check if the client already exists
     $result = mysqli_query($conn, $query);
-    if (mysqli_num_rows($result) > 0) {
-        return mysqli_fetch_assoc($result)['clientID']; // returns clientID if exists
+    if (mysqli_num_rows($result) > 0) { // If the query returns more than 0 rows i.e the client exists
+        return mysqli_fetch_assoc($result)['clientID']; // returns clientID 
     }
     return false;
 }
 
+//retreiving the clientID                       
 $clientID = clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $clientCell);
 
-if (!$clientID) {
+if (!$clientID) { //if the client id does not exists
     header('Location: redirectSigin.html'); // Redirect to create account page if client does not exist
     exit();
 }

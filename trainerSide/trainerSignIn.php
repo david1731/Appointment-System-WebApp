@@ -1,8 +1,10 @@
 <?php
 include 'connection.php';
 //var_dump($_POST);
+//retrieve trainerID sent from the sigin form
 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']): 'trainerID';
 
+//validate trainer so that only trainers can access this page
 function validarTrainer($conn, $trainerID) {
     $query = "SELECT trainerID FROM trainers WHERE trainerID = '$trainerID'";
     $result = mysqli_query($conn, $query);
@@ -13,7 +15,7 @@ function validarTrainer($conn, $trainerID) {
 }
 
 $validTrainer = validarTrainer($conn, $trainerID);
-if (!$validTrainer) {
+if (!$validTrainer) { // if trainer not valid, redirect to sigin page
     header('Location: trainerSignIn.html');
     exit();
 }
