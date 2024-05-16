@@ -12,7 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $serviceID = $conn->real_escape_string($_POST['serviceID']);
     $levelID = $conn->real_escape_string($_POST['levelID']);
     $trainerID = $conn->real_escape_string($_POST['trainerID']);
-    $date = $conn->real_escape_string($_POST['fecha']): "Fecha Vacia";
+    // $date = $conn->real_escape_string($_POST['fecha']): "Fecha Vacia";
+    $date = isset($_POST['fecha']) ? $_POST['fecha'] : 'Fecha Vacia';
 
     // Check if appointment slot is available
     if (verificarCita($conn, $slotID, $date)) {
