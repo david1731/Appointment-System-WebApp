@@ -37,8 +37,10 @@
                 <?php
                 include 'index.php';
                 //var_dump($_POST);
+                //retrieve clientID from post to only display the appointments of that specific client
                 $clientID = isset($_POST['clientID']) ? $conn->real_escape_string($_POST['clientID']) : 0000;
                 
+                //joining tables to display the appointments of the client with additional information
                 $sql = "SELECT
                 cl.clientID AS ClientID,
                 cl.firstName AS ClientFirstName,
@@ -63,8 +65,10 @@
                 ORDER BY
                 ap.appDate, ts.startTime";
                 
+                //execute and store query result
                 $res = mysqli_query($conn, $sql);
                 
+                //dislpaye table of appointments
                 while($row = mysqli_fetch_assoc($res)) {
                     $clientFullName = $row['ClientFirstName'] . " " . $row['ClientLastName'];
                     $trainerFullName = $row['TrainerName'] . " " . $row['TrainerLast'];

@@ -1,15 +1,19 @@
 <?php
 include 'index.php';
 //var_dump($_POST);
-//para borrar la cita de un cliente necesito el appID
-//pero para obtener el appID necesito el clientID, el slot id y la fecha
+
+
+//To delete the appointment of a client I need the appID but to find the appId I need the clientID, the slot id and the date
+
+//retrieve the clientID, slotID and appDate from the POST request
 $clientId = isset($_POST['clientId']) ? $_POST['clientId'] : 0000;
 $slotId = isset($_POST['slotID']) ? $_POST['slotID'] : null;
 $appDate = isset($_POST['appDate']) ? $_POST['appDate'] : null;
 
-
+//delete the appointment from the database
 $sql = "DELETE FROM appointmentSlots WHERE clientID = '$clientId' AND slotID = '$slotId' AND appDate = '$appDate'";
-        
+ 
+//check if the appointment was deleted successfully
 if ($conn->query($sql) === TRUE) {
     $message = "Cita cancelada correctamente.";
 } else {

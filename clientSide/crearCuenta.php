@@ -8,9 +8,10 @@ function clienteExiste($conn, $clientName, $clientLastName, $clientEmail, $clien
     $clientEmail = $conn->real_escape_string($clientEmail);
     $clientCell = $conn->real_escape_string($clientCell);
 
+    // Query to check if the client exists
     $query = "SELECT clientID FROM clients WHERE email = '$clientEmail' AND cellphone = '$clientCell' AND firstName = '$clientName' AND lastName = '$clientLastName'";
-    $result = mysqli_query($conn, $query);
-    if (mysqli_num_rows($result) > 0) {
+    $result = mysqli_query($conn, $query); // Execute the query and store the result in a variable
+    if (mysqli_num_rows($result) > 0) { // If the query returns more than 0 rows
         return mysqli_fetch_assoc($result)['clientID']; // returns clientID if exists
     }
     return false;
@@ -39,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user_id = 0;
 
             while ($exists) {
-                $user_id = mt_rand(1000, 9999);
-                $query = "SELECT clientId FROM clients WHERE clientId = $user_id";
+                $user_id = mt_rand(1000, 9999); //generates a random four digit ID
+                $query = "SELECT clientId FROM clients WHERE clientId = $user_id"; // Query to check if the ID already exists
                 $result = mysqli_query($conn, $query);
 
                 if (mysqli_num_rows($result) == 0) {  // If no rows, the ID is unique
@@ -56,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Insert the new client into the database
         $sql = "INSERT INTO clients (clientId, firstName, lastName, email, cellphone) VALUES ('$newClientID', '$clientName', '$clientLastName', '$clientEmail', '$clientCell')";
 
+        // Check if the client was created successfully
         if ($conn->query($sql) === TRUE) {
             $message = "Su cuenta se ha creado exitosamente.";
         } else {
