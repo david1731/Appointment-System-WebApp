@@ -1,12 +1,12 @@
 <?php
 include 'connection.php';
 //var_dump($_POST);
-//Cambiar cita de Disponible a No Disponible
+//retreieve data from post
 $slotID = isset($_POST['slotID']) ? $_POST['slotID'] : null;
 $trainerID = isset($_POST['trainerID']) ? $_POST['trainerID'] : null;
-$sql = "UPDATE timeSlots SET statusHora = 'No Disponible' WHERE slotID = '$slotID'";
+$sql = "UPDATE timeSlots SET statusHora = 'No Disponible' WHERE slotID = '$slotID'"; //update time slot status to not available
 
-if ($conn->query($sql) === TRUE) {
+if ($conn->query($sql) === TRUE) { //confirmation message if query executed correctly
     $message = "Hora cambiada a No Disponible correctamente.";
 } else {
     $message =  "Error al cambiar hora a Disponible: " . $conn->error;

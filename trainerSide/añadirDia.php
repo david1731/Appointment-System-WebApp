@@ -1,11 +1,12 @@
 <?php 
 include 'connection.php';
-
+//This file is for the trainer to add which days will he be available to work
 //var_dump($_POST);
-//Fetch trainerID from post
+
+//Fetch trainerID from post and the date from post 
 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']): 'trainerID';
 $fecha = isset($_POST['fecha']) ? $conn->real_escape_string($_POST['fecha']): 'fecha';
-$query = "INSERT INTO fechas (fecha) VALUES ('$fecha')";
+$query = "INSERT INTO fechas (fecha) VALUES ('$fecha')"; //query to insert tha values into the table fechas
 
 if ($conn->query($query) === TRUE) { //If query executes correctly, a confirmation messaged is displayed
     $message = "Dia añadido exitosamente";

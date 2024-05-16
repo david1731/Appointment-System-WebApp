@@ -22,9 +22,9 @@
                 //var_dump($_POST);
                 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']) : 'trainerID'; //not being used but is needed for the form 
 
-                $query = "SELECT slotID, startTime, endTime, statusHora FROM timeSlots";
-                $result = mysqli_query($conn, $query);
-                while($row = mysqli_fetch_assoc($result)) {
+                $query = "SELECT slotID, startTime, endTime, statusHora FROM timeSlots"; //query to select all the time slots
+                $result = mysqli_query($conn, $query); //store result of query
+                while($row = mysqli_fetch_assoc($result)) { //display rows of the query result
                     $hora = $row['startTime'] . " - " . $row['endTime'];
                     $status = $row['statusHora'];
                     

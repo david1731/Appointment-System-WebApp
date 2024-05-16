@@ -1,10 +1,10 @@
 <?php
 include 'connection.php';
 //var_dump($_POST);
-//Cambiar cita de No disponible a Disponible
+//retrieve data sent via post method
 $slotID = isset($_POST['slotID']) ? $_POST['slotID'] : null;
 $trainerID = isset($_POST['trainerID']) ? $_POST['trainerID'] : null;
-$sql = "UPDATE timeSlots SET statusHora = 'Disponible' WHERE slotID = '$slotID'";
+$sql = "UPDATE timeSlots SET statusHora = 'Disponible' WHERE slotID = '$slotID'"; //query to update availability of timeSlot
 
 if ($conn->query($sql) === TRUE) {
     $message = "Hora cambiada a Disponible correctamente.";

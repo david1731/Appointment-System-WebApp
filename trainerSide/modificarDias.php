@@ -33,9 +33,11 @@
             <?php
             //var_dump($_POST);
             include 'connection.php';
+            //retrieve data from post
             $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']) : 'trainerID'; //not being used but is needed for the form
-            $query = "SELECT fecha FROM fechas";
-            $result = mysqli_query($conn, $query);
+            $query = "SELECT fecha FROM fechas"; //query to select all the days
+            $result = mysqli_query($conn, $query); //store result of query
+            //display input field so trainer can add days
             echo "<div class='container'>";
             echo "<h2>Modificar Dias</h2>";
             echo "<form action='añadirDia.php' method='post'>";
@@ -50,7 +52,7 @@
             echo "</form>";
             echo "</div>";
             echo "<h2>Eliminar Dias</h2>";
-            while($row = mysqli_fetch_assoc($result)) {
+            while($row = mysqli_fetch_assoc($result)) {//display available days with option to delete them
                 $fecha = $row['fecha'];
                 
                 echo "<tr>";

@@ -1,11 +1,12 @@
 <?php
 //var_dump($_POST);
 include 'connection.php';
+//retrieve appID so trainer can delete a specific appointment
 $appID = isset($_POST['appID']) ? $conn->real_escape_string($_POST['appID']) : 'appID';
 $trainerID = isset($_POST['trainerID']) ? $conn->real_escape_string($_POST['trainerID']) : 'trainerID';
 
-$sql = "DELETE FROM appointmentSlots WHERE appID = '$appID'";
-if ($conn->query($sql) === TRUE) {
+$sql = "DELETE FROM appointmentSlots WHERE appID = '$appID'"; //delete the appointment from the table appointmentSlots
+if ($conn->query($sql) === TRUE) { //confirmation message if the query is executed correctly
     $message = "Cita cancelada correctamente.";
 } else {
     $message =  "Error al cancelar cita: " . $conn->error;

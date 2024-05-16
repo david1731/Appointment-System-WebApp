@@ -1,12 +1,13 @@
 <?php 
 include 'connection.php';
 //var_dump($_POST);
+//receives teh information from modificarDias.php to delete the day from the table fechas
 $fecha = isset($_POST['fecha']) ? $_POST['fecha'] : 'Mes/Dia/Año';
 $trainerID = isset($_POST['trainerID']) ? $_POST['trainerID'] : 00000;
 
-$sql = "DELETE FROM fechas WHERE fecha = '$fecha'";
+$sql = "DELETE FROM fechas WHERE fecha = '$fecha'"; //delete the day from the table fechas
 
-if ($conn->query($sql) === TRUE) {
+if ($conn->query($sql) === TRUE) { //confirmation message if the query is executed correctly
     $message = "Dia eliminado correctamente.";
 } else {
     $message =  "Error al eliminar dia: " . $conn->error;
