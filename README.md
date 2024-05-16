@@ -1,5 +1,5 @@
 
-# Basketball Trainer Web App User Guide
+# HustleHoopersPR Web App User Guide
 
 Welcome to the HustleHoopersPR Web App, a comprehensive platform designed for clients to connect with their trainer and manage their training sessions effectively. This guide provides a walkthrough of how to use the various features of the web app.
 
